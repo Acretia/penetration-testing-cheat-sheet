@@ -8,7 +8,7 @@ For help with any of the tools write `<tool_name> -h | --help` or `man <tool_nam
 
 Sometimes `-h` can be mistaken for a host or some other option. If that's the case, use `--help` instead or read the manual with `man`.
 
-Some of these tools do the same tasks but get slightly different results, which can sometimes have a significant impact.
+Some of these tools do the same tasks but get slightly different results, run everything you can.
 
 If you didn't already, read the [OWASP Testing Guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf).
 
@@ -40,7 +40,9 @@ If you didn't already, read the [OWASP Testing Guide v4](https://owasp.org/www-p
 
 * [Parsero](#parsero)
 
-**2. [Enumeration](#2-enumeration)**
+* [SecLists](#seclists)
+
+**2. [Scanning/Enumeration](#2-scanning-enumeration)**
 
 * [Useful Websites](#2-scanning-useful-websites)
 
@@ -51,8 +53,6 @@ If you didn't already, read the [OWASP Testing Guide v4](https://owasp.org/www-p
 * [WPScan](#wpscan)
 
 * [testssl.sh](#testssl-sh)
-
-* [SecLists](#seclists)
 
 **3. [Gaining Access](#3-gaining-access)**
 
@@ -164,7 +164,7 @@ Gather information about a specified host:
 theHarvester -d somesite.com -l 500 -b google,bing,yahoo,linkedin -f /root/Desktop/theHarvester_results.xml
 ```
 
-Make sure you specify a full path to an output file; otherwise, it will default to /usr/lib/python3/dist-packages/theHarvester directory
+Make sure you specify a full path to an output file; otherwise, it will default to `/usr/lib/python3/dist-packages/theHarvester` directory.
 
 Use this one-liner to extract hostnames from the results:
 
@@ -287,6 +287,12 @@ For more options run `man dnsrecon` or `dnsrecon -h`.
 
 ### Sublist3r
 
+Installation:
+
+```fundamental
+apt-get install sublist3r
+```
+
 Enumerate subdomains using OSINT:
 
 ```fundamental
@@ -348,9 +354,27 @@ parsero -u somesite.com -sb
 
 For more options run `parsero -h`.
 
-<p id="2-enumeration"/>
+<p id="2-scanning-enumeration"/>
 
-## 2. Enumeration
+<p id="seclists"/>
+
+### SecLists
+
+Download a useful collection of multiple types of lists for security assessments.
+
+Installation:
+
+```fundamental
+apt-get install seclists
+```
+
+Lists will be stored at `/usr/share/seclists/`.
+
+Or, download the collection manually from [here](https://github.com/danielmiessler/SecLists/releases).
+
+Also, check the one-time-password lists in [/dict/otp.zip](https://github.com/ivan-sincek/penetration-testing-cheat-sheet/tree/master/dict).
+
+## 2. Scanning/Enumeration
 
 Keep in mind that web applications can also be hosted on other ports besides 80 (HTTP) and 443 (HTTPS).
 
@@ -466,24 +490,6 @@ Test an SSL/TLS certificate (i.e. SSL/TLS ciphers, protocols, etc.):
 ```
 
 For more options run `./testssl.sh --help`.
-
-<p id="seclists"/>
-
-### SecLists
-
-Download a useful collection of multiple types of lists for security assessments.
-
-Download:
-
-```fundamental
-apt-get install seclists
-```
-
-Lists will be stored at `/usr/share/seclists/`.
-
-Or, download the collection manually from [here](https://github.com/danielmiessler/SecLists/releases).
-
-Also, check the one-time-password lists in [/dict/otp.zip](https://github.com/ivan-sincek/penetration-testing-cheat-sheet/tree/master/dict).
 
 <p id="3-gaining-access"/>
 
@@ -638,7 +644,7 @@ dotdotpwn -m http -u somesite.com/index.php?file=TRAVERSAL
 | -M | HTTP Method to use when using the 'http' module \[GET \| POST \| HEAD \| COPY \| MOVE\] (default: GET) |
 | -b | Break after the first vulnerability is found |
 
-For more options just run `dotdotpwn`.
+For more options simply run `dotdotpwn`.
 
 <p id="generate-a-reverse-shell-payload-for-python"/>
 
@@ -712,7 +718,7 @@ So far there is no easy way to generate a DLL nor MSI file with a stageless mete
 
 **Google a hash before trying to crack it because you might save yourself a lot of time and trouble.**
 
-Use Google Dorks to find files and within file's properties a domain username to brute force or use [FOCA](#foca).
+Use Google Dorks to find files and within file's metadata a domain username to brute force or use [FOCA](#foca).
 
 Keep in mind that you might lockout someone's account.
 
@@ -846,9 +852,9 @@ hashcat --session=cracking --restore
 | -3 | User-defined charset ?3 |
 | -4 | User-defined charset ?4 |
 
-**When specifying a user-defined charset escape `?` with another `?` (i.e. use `??` instead of `\?`).**
-
 For more options run `man hashcat` or `hashcat -h`.
+
+**When specifying a user-defined charset escape `?` with another `?` (i.e. use `??` instead of `\?`).**
 
 | Hash Type | Description |
 | --- | --- |
