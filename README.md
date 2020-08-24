@@ -1096,7 +1096,7 @@ To generate a PowerShell encoded command from a PowerShell script, run the follo
 [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes([IO.File]::ReadAllText($script)))
 ```
 
-To run the encoded command, run the following command from either PowerShell or Command Prompt:
+To run the PowerShell encoded command, run the following command from either PowerShell or Command Prompt:
 
 ```pwsh
 PowerShell -ExecutionPolicy Unrestricted -NoProfile -EncodedCommand $encoded
